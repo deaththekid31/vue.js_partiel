@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="style_commande.css">
+		<script src="https://kit.fontawesome.com/b18d141c3f.js" crossorigin="anonymous"></script>
+		<script src="commande.js"></script>
+		<script type="commande.js" src="data.json"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+		<script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+				<nav>
+					<figure id="icone_site">
+					<img src="images-20210903T100735Z-001\images\logo\Reservia@3x.png" width="80" height="60">
+					</figure>	
+					<ul id="menu_haut">
+						<li class="menu_haut_element"><a href="">Homme</a></li>
+						<li class="menu_haut_element"><a id="acti" href="">Femme</a></li>
+						<li class="menu_haut_element"><a href="">Nouveauté</a></li>
+						<li class="menu_haut_element"><a href="">A venir</a></li>
+					</ul>
+					<ul id="panneau_haut">
+						<li class="panneau_haut_element"><input class="panneau_haut_element_image" type="image" src="../maquette/panier.jfif"/></li>
+						<li class="panneau_haut_element"><input class="panneau_haut_element_image" type="image" src="../maquette/avatar.jpg"/></li>
+					</ul>
+	
+				</nav>
+			</header>
+			<div class="div suivis">
+				<button class="selectionne bouton" type="button">
+					RESUME
+				</button>
+				<i class="fleche fas fa-arrow-right"></i>
+				<button class="bouton" type="button">
+					ADRESSE
+				</button>
+				<i class="fleche fas fa-arrow-right"></i>
+				<button class="bouton" type="button">
+					MODE DE LIVRAISON
+				</button>
+				<i class="fleche fas fa-arrow-right"></i>
+				<button class="bouton" type="button">
+					PAIEMENT
+				</button>
+			</div>
+			<div class="div recapitulatif">
+				<div id="recap_prod">
+					<p id="titre_recap">RECAPITULATIF DE LA COMMANDE</p>
+					<div id="bandeau_prod">
+						<p>Acticle</p>
+						<p>Nom du produit</p>
+						<p>Prix TTC</p>
+						<p>Quantité</p>
+						<p>Total</p>
+						<p> Suppression</p>
+					</div>
+					<div class="emplacementProduit">	
+						<div id="prod1" class="bandeau_prod2" v-for="chaussure in chaussures">
+							<img class="image_chau" v-bind:src= "chaussure.imageChaussure">
+							<p class="nom_prod">{{ chaussure.nomChaussure }}</p>
+							<input class="prix_TTC" readonly="true" type="text" v-model="chaussure.prixTTC">
+							<div>
+								<input class="image_quantité gauche" type="image" src="../maquette/moins.png" v-on:click="diminuer(chaussure)"/>
+								<input class="quantité" type="text"  v-model="chaussure.quantité">
+								<input class="image_quantité droit" type="image" src="../maquette/plus.jpg" v-on:click="augmenter(chaussure)"/>
+							</div>
+							<input class="total" readonly="true" type="text" min="0" v-model="prixTotal(chaussure)">
+							<input class="image_supp" type="image" src="../maquette/supprimer.jpg" v-on:click="supprimer(chaussure)"/>
+						</div>
+					</div>
+					
+	
+					<div class="totaux">
+						<p>TOTAL</p>
+						<input class="total" type="text" v-model="prixTotaux()">
+					</div>
+	
+				</div>
+				<div id="recap_aide">
+					<div>
+						<p class="texte_delai">BESOIN D'AIDE ?</p>
+						<p>05 61 44 53 05</p>
+						<p>Lun - Ven(10h-12h30 / 14h-19h)</p>
+						<button class="bouton_aide" type="button">
+							Nous contacter >
+						</button>
+						<p class="texte_delai" >DELAI DE LIVRAISON</p>
+						<p>Date de livraison estimée entre le</br> Vendredi 25 Août 2017</br> et le</br> Samedi 26 Août 2017 </p>
+					</div>
+				</div>
+			</div>
+			
+			<div id="adresse">
+				<div id="adr1">
+					<label for="Nom">Nom</label>
+					<input type="text" v-model="nomClient"  required minlength="15" maxlength="30" size="10">
+	
+					<label for="Rue">Rue</label>
+					<input type="text" v-model="rueClient"  required minlength="50" maxlength="70" size="10">
+	
+					<label for="Code postal">Code postal</label>
+					<input type="text" v-model="codePostalClient"  required minlength="5" maxlength="8" size="10">
+				</div>
+				<div id="adr2">
+					<label for="Ville">Ville</label>
+					<input type="text" v-model="villeClient"  required minlength="10" maxlength="15" size="10">
+	
+					<label for="Email">Email</label>
+					<input type="text" v-model="emailClient"  required minlength="10" maxlength="20" size="10">
+	
+					<label for="Téléphone">Téléphone</label>
+					<input type="text" v-model="telClient"  required minlength="10" maxlength="10" size="10">
+				</div>
+    
+			</div>
+
+			<div class="div d_bouton">
+				<div>
+					<button class="bouton_continuer" type="button">
+						< continuer mes achats
+					</button>
+				</div>
+				<div>
+					<div>
+						<input type="checkbox" id="relais" v-model="livraisonRelais" v-on:click="relais()">
+						<label for="dewey">Retrait en relais colis : 5€</label>
+					  </div>
+					  <div>
+						<input type="checkbox" id="domicile" v-model="livraisonDomicile" v-on:click="domicile()">
+						<label for="dewey">Livraison a domicile : 12€</label>
+					  </div>
+				</div>
+				<div id="div_valider">
+					<button class="bouton_valider" type="button" v-on:click="adresse()">
+						Valider ma commande >
+					</button>
+				</div>	
+			</div>
+			<script>
+				
+
+			    const obj = {}	
+				
+				var app = new Vue({
+					el:"#app",
+					data: 
+					{
+						livraisonRelais: false,
+						livraisonDomicile: false,
+						chaussures: [
+							{
+								nomChaussure: "chaussure 8",
+								imageChaussure: "../maquette/chaussure/homme8.jpg",
+								prixTTC: "135€",
+								quantité: 1,
+								Total: 0
+							},
+							{
+								nomChaussure: "chaussure 1",
+								imageChaussure: "../maquette/chaussure/homme1.jpg",
+								prixTTC: "110€",
+								quantité: 1,
+								Total: 0
+							}
+						],
+						nomClient:"",
+						rueClient:"",
+						codePostalClient:"",
+						villeClient:"",
+						emailClient:"",
+						telClient:""
+					},
+
+					methods:
+					{
+						relais: function(){
+							this.livraisonRelais = true;
+							this.livraisonDomicile = false;							
+						},
+						domicile: function(){
+							this.livraisonRelais = false;
+							this.livraisonDomicile = true;					
+						},
+						adresse: function(){
+							console.log(this.nomClient);
+							
+							console.log(this.rueClient);
+							console.log(this.CPClient);
+							console.log(this.villeClient);
+							console.log(this.emailClient);
+							console.log(this.telClient);		
+						},
+						augmenter: function(chaussure){
+							this.chaussures.forEach(element => {
+								if (element.nomChaussure == chaussure.nomChaussure)
+								{
+									element.quantité = chaussure.quantité + 1;
+								}
+							});
+						},
+						diminuer: function(chaussure){
+							this.chaussures.forEach(element => {
+								if (element.nomChaussure == chaussure.nomChaussure)
+								{
+									element.quantité = chaussure.quantité - 1;
+								}
+							});
+						},
+						prixTotal: function(chaussure){
+							var prix = parseInt(chaussure.prixTTC.substring(0,chaussure.prixTTC.length - 1))
+							this.chaussures.forEach(element => {
+								if (element.nomChaussure == chaussure.nomChaussure)
+								{
+									element.Total = chaussure.quantité*prix;
+								}
+							});
+							return chaussure.quantité*prix
+						},
+						prixTotaux: function(){
+							var prixtotaux = 0;
+							this.chaussures.forEach(element => {
+								prixtotaux = prixtotaux + element.Total;
+							});
+							return prixtotaux
+						},
+						supprimer: function(chaussure){
+							var compteur = 0;
+							this.chaussures.forEach(element => {
+								if (element.nomChaussure == chaussure.nomChaussure)
+								{
+									this.chaussures.splice(compteur,1);
+								}
+								compteur = compteur+1;
+							});
+						}
+					}
+					//.$mount('#app') 2nd ligne pour router
+				}).$mount('#app')
+			</script>
+		</div>
+	</body>
+</html>
+
+
+
+
+<!---
+
+"{{ chaussure.imageChaussure }}"
+
+
+
+-->

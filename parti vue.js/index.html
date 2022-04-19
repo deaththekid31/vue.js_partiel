@@ -1,0 +1,131 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+<script src="./index.js"></script>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://kit.fontawesome.com/b18d141c3f.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+				<nav>
+					<figure id="icone_site">
+					<img src="images-20210903T100735Z-001\images\logo\Reservia@3x.png" width="80" height="60">
+					</figure>	
+					<ul id="menu_haut">
+						<li class="menu_haut_element"><a href="">Homme</a></li>
+						<li class="menu_haut_element"><a id="acti" href="">Femme</a></li>
+						<li class="menu_haut_element"><a href="">Nouveauté</a></li>
+						<li class="menu_haut_element"><a href="">A venir</a></li>
+					</ul>
+					<ul id="panneau_haut">
+						<li class="panneau_haut_element"><input class="panneau_haut_element_image" type="image" src="..\maquette\panier.jfif"/></li>
+						<li class="panneau_haut_element"><input class="panneau_haut_element_image" type="image" src="..\maquette\avatar.jpg"/></li>
+					</ul>
+	
+				</nav>
+			</header>
+			<div id="presentoir">
+				<ul id="categorie">
+					<li> <p> CATEGORIE</p> </li>
+					<li><a href="">Sneakers</a></li>
+					<li><a href="">bottes</a></li>
+					<li><a href="">sandales</a></li>
+					<li><a href="">tennis</a></li>
+				</ul>
+				<div id="vitrine">
+					<div id="filtre">
+							<select name="pets" id="pet-select">
+								<option value="">Marque</option>
+								<option v-for="i in marques" value="i">{{i}}</option>	
+							</select>
+							<select name="pets" id="pet-select">
+								<option value="">coloris</option>
+								<option v-for="i in couleur" value="i">{{i}}</option>
+							</select>
+							<select name="pets" id="pet-select">
+								<option value="">Taille</option>
+								<option v-for="i in tailles" value="i">{{i}}</option> 
+							</select>
+					</div>
+					<div id="chaussures">
+						<div id="chaussure" v-for="chaussure in chaussures">
+							<input type="image" v-bind:src="chaussure.imageChaussure"/>
+							<p> {{ chaussure.nomChaussure }} <br> {{ chaussure.prixTTC }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+
+<script>
+
+var app = new Vue({
+	el:"#app",
+	data: 
+	{
+
+
+		marques:["Addidas","Nike","Vans","Timberland","Converse","New balance"],
+		tailles:[36,37,38,39,40,41,42,43,44,45,46],
+		couleur:["Beige","Noir","Bleu","Marine","Doré","Vert","Gris","Orange","Rose","Violet","Rouge",
+		"Blanc","Jaune","Autre","Or","Argent"],
+		chaussures: [
+							{
+								nomChaussure: "chaussure 1",
+								imageChaussure: "../maquette/chaussure/homme1.jpg",
+								prixTTC: "135€",
+							},
+							{
+								nomChaussure: "chaussure 2",
+								imageChaussure: "../maquette/chaussure/homme2.jpg",
+								prixTTC: "110€",
+							},
+							{
+								nomChaussure: "chaussure 3",
+								imageChaussure: "../maquette/chaussure/homme3.jpg",
+								prixTTC: "120€",
+							},
+							{
+								nomChaussure: "chaussure 4",
+								imageChaussure: "../maquette/chaussure/homme4.jpg",
+								prixTTC: "140€",
+							},
+							{
+								nomChaussure: "chaussure 5",
+								imageChaussure: "../maquette/chaussure/homme5.jpg",
+								prixTTC: "159€",
+							},
+							{
+								nomChaussure: "chaussure 6",
+								imageChaussure: "../maquette/chaussure/homme6.jpg",
+								prixTTC: "80€",
+							},
+							{
+								nomChaussure: "chaussure 7",
+								imageChaussure: "../maquette/chaussure/homme7.jpg",
+								prixTTC: "50€",
+							},
+							{
+								nomChaussure: "chaussure 8",
+								imageChaussure: "../maquette/chaussure/homme8.jpg",
+								prixTTC: "100€",
+								}
+						],
+	},
+	methods:
+	{
+
+	}	
+})
+
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="style_connexion.css">
+		<script src="https://kit.fontawesome.com/b18d141c3f.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+		<script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
+	</head>
+<body>
+	<div id="app">
+		<header>
+			<nav>
+			</nav>
+		</header>
+		<div id="connexion">
+			<div class="div_txt">
+				<p>identifiant</p>
+				<input type="text" v-model="identifiantEntre" class="form" name="identifiant">
+			</div>
+			<div class="div_txt">
+				<p>Mot de passe</p>
+				<input type="text" v-model="motDePasseEntre" class="form" name="MotDePasse">
+			</div>
+			<div id="div_btn">
+				<button class="bouton bouton_retour" type="button">
+					retour
+				</button>
+				<button class="bouton bouton_inscription" type="button" v-on:click="identification(identifiantEntre, motDePasseEntre)">
+					connexion
+				</button>
+			</div>
+		</div>
+		<div id="connexionEchouee" class="modal" v-if="modalEchec == true">
+			<!-- Modal content -->
+			<div class="modal-content" >
+			  <span class="close" v-on:click="closeModalEchec()">&times;</span>
+			  <p class="message">Identifiant incorectes veuillez reesayer.</p>
+			</div>
+		</div>
+		<div id="connexionReussit" class="modal" v-if="modalReusite == true">
+			<!-- Modal content -->
+			<div class="modal-content" >
+			  <span class="close" v-on:click="closeModalReusite()">&times;</span>
+			  <p class="message">Bienvenue sur votre espace.</p>
+			</div>
+		</div>
+		<script>
+			
+			const obj = {}	
+			
+			var app = new Vue({
+				el:"#app",
+				data: 
+				{
+					modalReusite:"false",
+					modalEchec:"false",
+					identifiantEntre: "",
+					motDePasseEntre: "",
+					utilisateurs: [
+						{
+							nom: "LECLIENT",
+							prenom: "Jean",
+							identifiant: "jean.leclient",
+							motDePasse: "motdepasse",
+							adresseMail: "jean.leclient@gmail.com"
+						},
+						{
+							nom: "LECLIENT",
+							prenom: "Pierre",
+							identifiant: "pierre.leclient",
+							motDePasse: "motdepasse",
+							adresseMail: "pierre.leclient@gmail.com"
+						},
+						
+					],
+					
+					
+				},
+	
+				methods:
+				{
+					
+					closeModalEchec: function(){						
+						this.modalEchec = false;
+					},
+					closeModalReusite: function(){						
+						this.modalReusite = false;
+					},
+					identification: function(identifiantEntre, motDePasseEntre){
+						var jamaisVraie = true;	
+						var identifiantCorrect = false;					
+						this.utilisateurs.forEach(element => {
+							if(element.identifiant == identifiantEntre)
+							{
+								jamaisVraie = false;
+								if(element.motDePasse == motDePasseEntre)
+								{
+									
+									identifiantCorrect = true;
+								}
+							}
+						});	
+						if(jamaisVraie || !identifiantCorrect)
+						{
+							this.modalEchec = true;
+							this.modalReusite = false
+						}
+						else
+						{
+							this.modalReusite = true;
+							this.modalEchec = false;
+						}
+					},
+					
+				}
+				//.$mount('#app') 2nd ligne pour router
+			}).$mount('#app')
+		</script>	
+	</div>	
+</body>
+</html>

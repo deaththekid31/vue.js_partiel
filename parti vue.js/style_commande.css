@@ -1,0 +1,297 @@
+html{
+	height: 870px;
+}
+body{
+	margin: 0%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+ul 
+{
+list-style-type: none;
+}
+a:link 
+{ 
+	text-decoration:none; 
+	color: #DB0B03;
+	font-weight: bold;
+
+} 
+a:visited
+{
+	color: #DB0B03;
+}
+a:hover
+{
+	color: black;
+}
+header{
+	height: 15%;
+}
+nav{
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	border-bottom: solid #5F68F8;
+}
+#icone_site{
+	width: 20%;
+}
+#menu_haut
+{
+	width: 40%;
+	display: flex;
+	justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+	position: relative;
+	top: 0em;  
+	color: black;
+}
+.menu_haut_element
+{
+	display: flex;
+	flex-direction: row;
+	border: 1px black;
+	border-radius: 10%;
+	border-bottom: solid #EE0066;
+
+}
+.menu_haut_element:hover
+{
+	border-bottom: solid black;
+}
+#panneau_haut{
+	width: 40%;
+	height: 10%;
+	display: flex;
+	justify-content: flex-end;
+    margin: 0%;
+}
+.panneau_haut_element{
+	height: 100%;
+	display: flex;
+
+
+}
+.panneau_haut_element_image{
+    width: 40px;
+    height: 40px;
+}
+
+.div{
+	width: 100%;
+}
+.suivis{
+	height: 11%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bouton{
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    height: 40%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    top: 25%;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;	
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.bouton_aide{
+	background-color: grey; 
+	border: none;
+    color: white;
+	height: 15%;
+	width: 40%;
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    cursor: pointer;	
+}
+.selectionne{
+	color: black;
+}
+
+.fleche{
+	padding-top: 3%;
+	color: #4CAF50;
+    font-size: 3em;
+    align-content: center;
+
+}
+
+
+.recapitulatif{
+	height: 59%;
+	display: flex;
+}
+#recap_prod{
+	height: 100%;
+	width: 77%;
+}
+
+#titre_recap{
+	font-size: 2em;
+}
+
+#bandeau_prod{
+	padding-left: 5%;
+	padding-right: 5%;
+	display: flex;
+	justify-content: space-between;
+	border-top: solid #5F68F8;
+	border-bottom: solid #5F68F8;
+
+}
+.bandeau_prod2{
+	display: flex;
+	justify-content: space-between;
+	padding-left: 0%;
+	padding-right: 5%;
+	align-items: center;
+}
+.image_chau{
+	width: 10%;
+	height: 68%;
+}
+.nom_prod{
+	position: relative;
+    left: 9.5%;
+}
+.prix_TTC{
+	border: none;
+	text-align: center;
+	position: relative;
+    left: 15%;
+}
+.bandeau_prod2 div{
+	display: flex;
+	width: 20%;
+	position: relative;
+	left: 11%;
+	flex-direction: row;
+}
+.image_quantité{
+	width: 33%;
+	height: 34%;
+}
+.image_supp{
+	
+	left: 13%;
+	width: 7%;
+	height: 7%;
+
+}
+.quantité{
+	width: 33%;
+	text-align: center;
+}
+.total{
+	border: none;
+	text-align: center;
+	position: relative;
+	left: 6.5%;
+}
+
+.totaux{
+	display: flex;
+	justify-content: flex-end;
+}
+
+#recap_aide{
+	height: 100%;
+	width: 30%;
+}
+#recap_aide div{
+	width: 100%;
+}
+
+
+.d_bouton{
+	height: 8%;
+	display: flex;
+}
+.d_bouton div{
+	width: 50%;
+	position: relative;
+	top: 200%;
+	height: 65;
+}
+
+.bouton_continuer{
+	position: relative;
+	left: 10%;
+	background-color: white; 
+	border: solid #DB0B03 1px;
+    color: black;
+	height: 100%;
+	width: 30%;
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.bouton_valider{
+	position: relative;
+	right: 10%;
+	background-color: #DB0B03; 
+	border: none;
+    color: white;
+	height: 100%;
+	width: 30%;
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    cursor: pointer;
+}
+#div_valider{
+	display: flex;
+	justify-content: flex-end;
+}
+
+#recap_aide{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+.texte_delai{
+	margin-top: 10%;
+	margin-left: 25%;
+	width: 50%;
+	border-bottom: solid grey 1px;
+}
+
+#adresse{
+	position: relative;
+	top: 40px;
+	
+}
+#adr1{
+
+	display: flex;
+	flex-wrap:  wrap;
+}
+#adr2{
+
+	display: flex;
+	flex-wrap:  wrap;
+}
+
+

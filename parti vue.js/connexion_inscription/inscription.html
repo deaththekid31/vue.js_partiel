@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="style_inscription.css">
+		<script src="https://kit.fontawesome.com/b18d141c3f.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+		<script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+	</head>
+<body>
+	<div id="app">
+		<header>
+			<nav>
+			</nav>
+		</header>
+		
+		<div id="connexion">
+			<div class="div_txt">
+				<p>Nom</p>
+				<input type="text" v-model="utilisateur.nom" class="form nom" name="nom">
+			</div>
+			<div class="div_txt">
+				<p>prenom</p>
+				<input type="text" v-model="utilisateur.prenom" class="form prenom" name="prenom">	
+			</div>
+			<div class="div_txt">
+				<p>tel.</p>
+				<input type="text"  class="form tel" name="tel">
+			</div>
+			<div class="div_txt">
+				<p>Mail</p>
+				<input type="text" v-model="utilisateur.adresseMail" class="form Mail" name="Mail">
+			</div>
+			<div class="div_txt">
+				<p>Mot de passe</p>
+				<input type="text" v-model="utilisateur.motDePasse" class="form mdp" name="mdp">
+			</div>
+			<div id="div_btn">
+				<button class="bouton bouton_retour" type="button">
+					retour
+				</button>
+				<button class="bouton bouton_inscription" type="button" v-on:click="verification()">
+					inscription
+				</button>
+			</div>
+		</div>
+		<div id="connexionEchouee" class="modal" v-if="modalEchec == true">
+			<!-- Modal content -->
+			<div class="modal-content" >
+			  <span class="close" v-on:click="closeModalEchec()">&times;</span>
+			  <p class="message">nom et(ou) prenom et(ou) identifiant et(ou) mot de passe et(ou) adresse mail incorectes<br>
+				  le nom et le prenom ne doivent pas contenir de caractere speciaux, doivent etre inferieur a 25 caractere et superieur a 0,<br>
+					l'identifiant inferieur a 25 caractere et superieur a 0,<br>
+					l'adresse mail ne doit pas contenir de caractere speciaux, doivent etre inferieur a 25 caractere et superieur a 0 et contenir un arobase,<br>
+					et le mot de passe doit contenir entre 8 et 15 caractere.<br>
+					(caractere speciaux = "espace | , | ; | $ | % | () | [] | ").
+					
+			  </p>
+			</div>
+		</div>
+		<div id="connexionReussit" class="modal" v-if="modalReusite == true">
+			<!-- Modal content -->
+			<div class="modal-content" >
+			  <span class="close" v-on:click="closeModalReusite()">&times;</span>
+			  <p class="message">inscription validée.</p>
+			</div>
+		</div>
+		<script>
+			
+			const obj = {}	
+			
+			var app = new Vue({
+				el:"#app",
+				data: 
+				{
+					modalReusite:"false",
+					modalEchec:"false",
+					identifiantEntre: "",
+					motDePasseEntre: "",
+					utilisateur:
+					{
+						nom: "",
+						prenom: "",
+						identifiant: "",
+						motDePasse: "",
+						adresseMail: ""
+					},
+					utilisateurs: [
+						{
+							nom: "LECLIENT",
+							prenom: "Jean",
+							identifiant: "jean.leclient",
+							motDePasse: "motdepasse",
+							adresseMail: "jean.leclient@gmail.com"
+						},
+						{
+							nom: "LECLIENT",
+							prenom: "Pierre",
+							identifiant: "pierre.leclient",
+							motDePasse: "motdepasse",
+							adresseMail: "pierre.leclient@gmail.com"
+						},
+						
+					],
+					
+					
+				},
+	
+				methods:
+				{
+					verification: function(utilisateur){
+						var nomCorrect = false;
+						var prenomCorrect = false;
+						var identifiantCorrect = false;
+						var motDePasseCorrect = false;
+						var adresseMailCorrect = false;		
+						nomCorrect = this.verificationNomPrenom(this.utilisateur.nom);
+						prenomCorrect = this.verificationNomPrenom(this.utilisateur.prenom);
+						this.utilisateur.identifiant = this.utilisateur.nom +"."+this.utilisateur.prenom;
+						identifiantCorrect = this.verificationIdentifiant(this.utilisateur.identifiant);
+						motDePasseCorrect = this.verificationMotDePasse(this.utilisateur.motDePasse);
+						adresseMailCorrect = this.verificationAdresseMail(this.utilisateur.adresseMail);
+						console.log(nomCorrect);
+						console.log(prenomCorrect);
+						console.log(identifiantCorrect);
+						console.log(motDePasseCorrect);
+						console.log(adresseMailCorrect);
+
+						if(nomCorrect && prenomCorrect && identifiantCorrect && motDePasseCorrect && adresseMailCorrect)
+						{
+							
+							this.modalReusite = true;
+							//erreur ici mon tableau n'est pas trouver.
+							this.utilisateurs.push(this.utilisateur);
+							
+							console.log(utilisateurs[2].nom);
+						}
+						else
+						{
+							this.modalEchec = true;
+						}
+					},
+					verificationChaineVide: function(chaine){
+						if(chaine != "")
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					},
+					verificationTailleVingtCinq: function(chaine){
+						if(chaine.length < 25)
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					},
+					verificationCaractereSpeciaux: function(chaine){		
+						if(!chaine.includes(" ")&&!chaine.includes("/")&&!chaine.includes(";")&&!chaine.includes(",")&&!chaine.includes("$")&&
+						!chaine.includes("%")&&!chaine.includes("(")&&!chaine.includes(")")&&!chaine.includes("[")&&!chaine.includes("]"))
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					},
+					verificationTailleEntreHuitEtQuinze: function(chaine){		
+						if(chaine.length > 8 && chaine.length < 15)
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					},
+					verificationArobase: function(chaine){		
+						if(chaine.includes("@"))
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					},
+					
+
+					verificationNomPrenom: function(nomPrenom){
+						var correct = false;
+						if(this.verificationChaineVide(nomPrenom))
+						{
+							if(this.verificationTailleVingtCinq(nomPrenom))
+							{
+								if(this.verificationCaractereSpeciaux(nomPrenom))
+								{
+									correct = true;
+								}
+							}
+						}
+						return correct;
+					},					
+					verificationIdentifiant: function(identifiant){
+						var correct = false;
+						if(this.verificationChaineVide(identifiant))
+						{
+							if(this.verificationTailleVingtCinq(identifiant))
+							{
+								correct = true;
+							}
+						}
+						return correct;
+					},
+					verificationMotDePasse: function(motDePasse){
+						var correct = false;
+						if(this.verificationChaineVide(motDePasse))
+						{
+							if(this.verificationTailleEntreHuitEtQuinze(motDePasse))
+							{
+								correct = true;
+							}
+						}
+						return correct;
+					},
+					verificationAdresseMail: function(adresseMail){
+						var correct = false;
+						if(this.verificationChaineVide(adresseMail))
+						{
+							if(this.verificationTailleVingtCinq(adresseMail))
+							{
+								if(this.verificationCaractereSpeciaux(adresseMail))
+								{
+									if(this.verificationArobase(adresseMail))
+									{
+										correct = true;
+									}
+								}
+							}
+						}
+						return correct;
+					},
+					
+					closeModalEchec: function(){						
+						this.modalEchec = false;
+					},
+					closeModalReusite: function(){						
+						this.modalReusite = false;
+					},
+					
+				}
+				//.$mount('#app') 2nd ligne pour router
+			}).$mount('#app')
+		</script>
+	</div>
+</body>
+</html>
